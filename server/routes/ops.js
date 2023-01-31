@@ -5,9 +5,9 @@ const router = express.Router();
 const User = require("../models/user");
 //To make more
 
-router.get(`/getuser`, fetchUser, async(req, res) => {
+router.get(`/getuserdets/:id`, fetchUser, async(req, res) => {
     try{
-        const user = await User.findOne(req.body.email);
+        const user = await User.findOne({email: req.body.email});
         res.json(user);
     }catch(error){
         console.error(error);
