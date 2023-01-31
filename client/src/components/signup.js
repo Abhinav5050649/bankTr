@@ -11,7 +11,7 @@ export const signup = () => {
         console.log(`Clicked`);
         e.preventDefault();
 
-        const response = await axios.post(`/api/auth/createuser`, credentials);
+        const response = axios.post(`/api/auth/createuser`, credentials);
         
         const json = await response.json();
         console.log(json);
@@ -52,5 +52,3 @@ export const signup = () => {
             </div>
     );
 };
-
-export default signup;

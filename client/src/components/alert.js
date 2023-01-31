@@ -8,5 +8,3 @@ export const alert = () => {
         </div>
     );
 }
-
-export default alert;
