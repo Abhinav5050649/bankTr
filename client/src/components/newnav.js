@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-export const newnav = ()=> {
+const Newnav = ()=> {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,3 +19,5 @@ export const newnav = ()=> {
         </nav>
     );
 }
+
+export default Newnav;

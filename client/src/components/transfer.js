@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export const transfer = () => {
+const Transfer = () => {
 
-
+    
     return(
         <div>
             
         </div>
     )
 };
+
+export default Transfer;

@@ -1,25 +1,26 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import  {alert}  from "./components/alert";
-import { login } from "./components/Login";
-import { signup } from "./components/SignUp";
-import {navbar} from "./components/navbar";
-import { newnav } from './components/newnav';
-import home from "./components/home";
-import operations from "./components/operations";
+import  Alert  from "./components/alert";
+import  Login  from "./components/Login";
+import  Signup  from "./components/SignUp";
+import Navbar from "./components/navbar";
+import Newnav  from './components/newnav';
+import Home from "./components/home";
+import Operations from "./components/operations";
+
 function App() {
 
-  if (!localStorage.getItem()){
+  if (!localStorage.getItem('token')){
     return (
       <>
         <Router>
-          <navbar/>
-          <alert/>
+          <Navbar/>
+          <Alert/>
             <div className="App">
               <Routes>
-                <Route exact path="/login" element={<login key="login" />}/>
-                <Route exact path="/signup" element={<signup key="signup" />}/>
+                <Route exact path="/login" element={<Login key="login" />}/>
+                <Route exact path="/signup" element={<Signup key="signup" />}/>
               </Routes>
             </div>
         </Router>
@@ -29,13 +30,13 @@ function App() {
     return(
       <>
       <Router>
-        <newnav/>
+        <Newnav/>
         <alert/>
           <div className="App">
             <Routes>
-              <Route exact path="/home" element={<home key="home" />}/>
-              <Route exact path="/operations" element={<signup key="operations" />}/>
-              <Route exact path="/transfer" element={<transfer key="transfer" />}/>
+              <Route exact path="/home" element={<Home key="home" />}/>
+              <Route exact path="/operations" element={<Operations key="operations" />}/>
+              <Route exact path="/transfer" element={<Transfer key="transfer" />}/>
             </Routes>
           </div>
       </Router>
