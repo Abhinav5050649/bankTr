@@ -6,7 +6,7 @@ const Signup = () => {
 
     let navigate = useNavigate();
     const [credentials, setCredentials] = useState({name: "", email: "", password: "", secPass: ""});
-
+    
     const handleSubmit = async(e) => {
         console.log(`Clicked`);
         e.preventDefault();

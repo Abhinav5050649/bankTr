@@ -6,10 +6,11 @@ const Transfer = () => {
     const [amtDefine, setAmtDefine] = React.useState(0.00)
     const [receiverEmail, setReceiverEmail] = React.useState('');
 
-
+    //to define
     const handleTransaction = () => {
     
     }
+
     return(
         <div className="input-group">
             <label>Amount at present: {}</label><br/>

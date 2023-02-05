@@ -1,8 +1,16 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Newnav = ()=> {
 
+    let navigate = useNavigate();
+
+    const handleClick = (e) => {
+      localStorage.removeItem('token');
+      navigate("/login");
+    }
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="/home">MiniBank</a>
@@ -14,6 +22,7 @@ const Newnav = ()=> {
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/operations">Operations</a>
               <a className="nav-item nav-link" href="/transfer">Transfer</a>
+              <a className="nav-item nav-link" onClick={handleClick}>LogOut</a>
             </div>
           </div>
         </nav>
