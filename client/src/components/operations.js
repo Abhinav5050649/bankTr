@@ -4,8 +4,18 @@ import { useNavigate } from "react-router-dom";
 const Operations = () => {
 
     const [amtDefine, setAmtDefine] = React.useState(0.00)
-
-    const user = axios.get()
+    let user1 = null;
+    const getDets = async() => {
+        const response = await fetch(`/api/ops/fetchuser`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token":   loclStorage.getItem('token'),
+            },
+        });
+        user1 = await response.json();
+    }
+    
     //to define
     const handleWithdraw = (e) => {
         if (amtDefine > amount)
@@ -29,12 +39,12 @@ const Operations = () => {
         const data = {
             "amount": amtDefine,
         }
-
-
     }
+
+    getDets();
     return(
         <div className="input-group">
-            <label>Amount at present: {}</label><br/>
+            <label>Amount at present: {user1.amount}</label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>

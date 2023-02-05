@@ -11,7 +11,13 @@ const Signup = () => {
         console.log(`Clicked`);
         e.preventDefault();
 
-        const response = axios.post(`/api/auth/createuser`, credentials);
+        const response = await fetch(`/api/auth/createuser`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({name: credentials.name, email: credentials.email , password: credentials.password }),
+        });
         
         const json = await response.json();
         console.log(json);
@@ -20,7 +26,7 @@ const Signup = () => {
         navigate("/login");
     }
 
-    const onChange = () => {
+    const onChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
     };
 

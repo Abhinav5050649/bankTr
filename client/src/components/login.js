@@ -11,16 +11,27 @@ export const login = () => {
         console.log(`Clicked`);
         e.preventDefault();
 
-        const response = axios.post(`/api/auth/createuser`, credentials);
+        const response = await fetch(`/api/auth/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email: credentials.email, password: credentials.password})
+        })
         
         const json = await response.json();
         console.log(json);
-        
-        localStorage.setItem('token', json.authToken);
-        navigate("/home");
+
+        if (json.success)
+        {
+            localStorage.setItem('token', json.authToken);
+            navigate("/home");
+        }else{
+            alert("invalid Type")
+        }
     }
 
-    const onChange = () => {
+    const onChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
     };
 
