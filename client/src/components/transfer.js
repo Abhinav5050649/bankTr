@@ -7,8 +7,8 @@ const Transfer = () => {
     const [receiverEmail, setReceiverEmail] = React.useState('');
 
     //to define
-    const handleTransaction = () => {
-    
+    const handleTransaction = async(e) => {
+        
     }
 
     return(

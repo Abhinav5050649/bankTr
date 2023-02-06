@@ -7,7 +7,7 @@ const User = require("../models/user");
 
 router.get(`/getuserdets`, fetchUser, async(req, res) => {
     try{
-        const user = await User.findOne({email: req.body.email});
+        const user = await User.findOne({email: req.headers.email});
         res.json(user);
     }catch(error){
         console.error(error);
@@ -17,7 +17,6 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
 
 router.put(`/modifyuser/:id`, fetchUser, 
 [
-    body("email").isEmail(),
     body("amount") >= 0.00,
 ],
 async(req, res) => {
@@ -39,6 +38,8 @@ async(req, res) => {
             {$set: useDets},
             {new:true}
         )
+        
+        res.json("Success");
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);
