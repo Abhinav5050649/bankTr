@@ -31,7 +31,7 @@ const Transfer = () => {
                 headers: {
                     "Content-Type": "application/json",
                     "auth-token":   localStorage.getItem('token'),
-                    "email": localStorage.getItem('email'),
+                    "email": receiverEmail,
                 },
             });
 
