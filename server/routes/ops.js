@@ -3,8 +3,8 @@ const {body, validationResult}  = require("express-validator");
 const fetchUser = require("../middleware/fetchuser");
 const router = express.Router();
 const User = require("../models/user");
-//To make more
 
+//To make more
 router.get(`/getuserdets`, fetchUser, async(req, res) => {
     try{
         const user = await User.findOne({email: req.headers.email});
@@ -15,9 +15,10 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
     }
 });
 
+//Need to check this once more
 router.put(`/modifyuser/:id`, fetchUser, 
 [
-    body("amount") >= 0.00,
+    body("amount").exists(),
 ],
 async(req, res) => {
     try{
@@ -27,16 +28,18 @@ async(req, res) => {
 
         if (amount) data.amount = amount;
         
-        let useDets = await User.findById(req.params.id);
+        let useDets = await User.findById(req.params._id);
         if (!useDets)
         {
             return res.status(404).send("Not Found!!!");
         }
 
+        useDets.amount = data.amount;
+
         useDets = await User.findOneAndUpdate(
-            req.params.id,
+            req.params._id,
             {$set: useDets},
-            {new:true}
+            {new: true}
         )
         
         res.json("Success");

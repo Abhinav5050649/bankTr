@@ -10,7 +10,7 @@ const JWT_SECRET = "thisIsJustATest";
 
 let success = true
 
-//define routes
+//defined routes and Tested. All routes working fine!!!
 
 router.post(`/createuser`, 
 [
@@ -68,7 +68,7 @@ router.post(`/login`,
         body("password").isLength({min: 5}),
     ], fetchUser, async(req, res) => {
         try{
-            userId = req.user.idl;
+            userId = req.user.id;
             const user = await User.findOne({email: req.body.email})
 
             if (!user)
@@ -76,7 +76,7 @@ router.post(`/login`,
                 return res.status(400).json(`Incorrect Details`)
             }
 
-            const passwordComparison = await bcrypt.compare(password, user.password);
+            const passwordComparison = await bcrypt.compare(req.body.password, user.password);
 
             if (!passwordComparison){
                 return res.status(400).json({error: `Incorrect Details!`});
@@ -88,7 +88,7 @@ router.post(`/login`,
                 },
             }
 
-            const authToken = jwt.sign(data, JWt_SECRET);
+            const authToken = jwt.sign(data, JWT_SECRET);
 
             res.json({success: authToken});
         }   catch (error)   {
@@ -108,3 +108,5 @@ router.post(`/getuser`, fetchUser, async(req, res) => {
         res.status(500).send(`Internal Server Error!!!`);
     }
 })
+
+module.exports = router;
