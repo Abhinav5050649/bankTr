@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const login = () => {
     
     let navigate = useNavigate();
-    const [credentials, setCredentials] = useState({email: "", password: ""});
+    const [credentials, setCredentials] = React.useState({email: "", password: ""});
 
     const handleSubmit = async(e) => {
         console.log(`Clicked`);

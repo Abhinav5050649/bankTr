@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import  Alert  from "./components/alert";
-import  Login  from "./components/Login";
-import  Signup  from "./components/SignUp";
+import  Login  from "./components/login";
+import  Signup  from "./components/signUp";
 import Navbar from "./components/navbar";
 import Newnav  from './components/newnav';
 import Home from "./components/home";
 import Operations from "./components/operations";
+import Transfer from "./components/transfer";
 
 function App() {
 

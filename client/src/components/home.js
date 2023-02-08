@@ -1,24 +1,27 @@
 import React from "react";
-import axios from "axios";
 
 const Home = () => {
 
-    const response = axios.get(`/api/ops/getuserdets`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'auth-token': localStorage.getItem('token'),
-        }
-    })
-    let dets = response.json();
-    if (dets == NULL)   console.log('error');
+    //handle user
+    // const response = get(`/api/ops/getuserdets`, {
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'auth-token': localStorage.getItem('token'),
+    //     }
+    // })
+    //let dets = response.json();
+    //if (!dets)   console.log('error');
 
-    const handleWithdraw = (e) => {
+    //handle withdraw
+    const handleWithdraw = async(e) => {
 
     }
 
-    const handleDeposit = (e) => {
+    //handle deposit
+    const handleDeposit = async(e) => {
         
     }
+
     return(
         <div>
             
