@@ -15,7 +15,7 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
     }
 });
 
-//Need to check this once more
+//Checked. Works fine now. Don't touch it no more!!!
 router.put(`/modifyuser/:id`, fetchUser, 
 [
     body("amount").exists(),
@@ -23,26 +23,23 @@ router.put(`/modifyuser/:id`, fetchUser,
 async(req, res) => {
     try{
         let amount = req.body.amount;
-
-        const data = {};
-
-        if (amount) data.amount = amount;
         
-        let useDets = await User.findById(req.params._id);
+        let useDets = await User.findOne({_id: req.params.id});
         if (!useDets)
         {
             return res.status(404).send("Not Found!!!");
         }
 
-        useDets.amount = data.amount;
+        useDets.amount = amount;
 
         useDets = await User.findOneAndUpdate(
-            req.params._id,
+            {_id: req.params.id},
             {$set: useDets},
             {new: true}
         )
-        
         res.json("Success");
+
+        console.log(useDets)
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);
