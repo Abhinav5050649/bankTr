@@ -1,10 +1,11 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-export const login = () => {
+export const Login = () => {
     
     let navigate = useNavigate();
-    const [credentials, setCredentials] = React.useState({email: "", password: ""});
+    //create indivdual changing components
+    const [credentials, setCredentials] = useState({email: "", password: ""});
 
     const handleSubmit = async(e) => {
         console.log(`Clicked`);
@@ -25,7 +26,7 @@ export const login = () => {
         {
             localStorage.setItem('token', json.authToken);
             localStorage.setItem('email', credentials.email);
-            navigate("/home");
+            navigate("/operations");
         }else{
             alert("invalid Type")
         }
@@ -51,4 +52,4 @@ export const login = () => {
     );
 };
 
-export default login;
+export default Login;

@@ -1,5 +1,5 @@
 import React from "react";
-import  useNavigate  from "react-router-dom";
+import  {useNavigate} from "react-router-dom";
 
 const Newnav = ()=> {
 
@@ -18,8 +18,7 @@ const Newnav = ()=> {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
-              <a className="nav-item nav-link" href="/operations">Operations</a>
+              <a className="nav-item nav-link active" href="/operations">Operations<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/transfer">Transfer</a>
               <a className="nav-item nav-link" onClick={handleClick}>LogOut</a>
             </div>

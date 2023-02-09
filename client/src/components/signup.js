@@ -1,9 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const Signup = () => {
 
     let navigate = useNavigate();
+    //create individual changing components
     const [credentials, setCredentials] = useState({name: "", email: "", password: "", secPass: ""});
     
     const handleSubmit = async(e) => {

@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import  Alert  from "./components/alert";
 import  Login  from "./components/login";
-import  Signup  from "./components/signUp";
+import Signup  from "./components/signup";
 import Navbar from "./components/navbar";
 import Newnav  from './components/newnav';
-import Home from "./components/home";
 import Operations from "./components/operations";
 import Transfer from "./components/transfer";
 
@@ -17,7 +15,6 @@ function App() {
       <>
         <Router>
           <Navbar/>
-          <Alert/>
             <div className="App">
               <Routes>
                 <Route exact path="/login" element={<Login key="login" />}/>
@@ -35,7 +32,6 @@ function App() {
         <alert/>
           <div className="App">
             <Routes>
-              <Route exact path="/home" element={<Home key="home" />}/>
               <Route exact path="/operations" element={<Operations key="operations" />}/>
               <Route exact path="/transfer" element={<Transfer key="transfer" />}/>
             </Routes>
