@@ -5,7 +5,10 @@ export const Login = () => {
     
     let navigate = useNavigate();
     //create indivdual changing components
-    const [credentials, setCredentials] = useState({email: "", password: ""});
+    //const [credentials, setCredentials] = useState({email: "", password: ""});
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleSubmit = async(e) => {
         console.log(`Clicked`);
@@ -16,7 +19,7 @@ export const Login = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({email: credentials.email, password: credentials.password})
+            body: JSON.stringify({email: email, password: password})
         })
         
         const json = await response.json();
@@ -32,20 +35,20 @@ export const Login = () => {
         }
     }
 
-    const onChange = (e) => {
-        setCredentials({...credentials, [e.target.name]: e.target.value});
-    };
+    // const onChange = (e) => {
+    //     setCredentials({...credentials, [e.target.name]: e.target.value});
+    // };
 
     return(
         <div>
                 <form onSubmit={handleSubmit}> 
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="textFormControlInput1" required={true}></input>
+                        <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} id="textFormControlInput1" required={true}></input>
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" className="form-control" value={credentials.password} onChange={onChange} id="textFormControlInput1" required={true}></input>
+                        <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="textFormControlInput1" required={true}></input>
                     </div>
                 </form>
         </div>
