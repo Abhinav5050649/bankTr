@@ -20,7 +20,7 @@ const Newnav = ()=> {
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/operations">Operations<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/transfer">Transfer</a>
-              <a className="nav-item nav-link" onClick={handleClick}>LogOut</a>
+              <button className="nav-item nav-link" onClick={handleClick}>Log Out</button>
             </div>
           </div>
         </nav>

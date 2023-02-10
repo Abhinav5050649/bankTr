@@ -28,7 +28,7 @@ export const Login = () => {
         if (json.success)
         {
             localStorage.setItem('token', json.authToken);
-            localStorage.setItem('email', credentials.email);
+            localStorage.setItem('email', email);
             navigate("/operations");
         }else{
             alert("invalid Type")
@@ -40,7 +40,7 @@ export const Login = () => {
     // };
 
     return(
-        <div>
+        <div className="input-form">
                 <form onSubmit={handleSubmit}> 
                     <div className="form-group">
                         <label>Email</label>

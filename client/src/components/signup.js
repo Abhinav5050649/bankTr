@@ -41,7 +41,7 @@ const Signup = () => {
     // };
 
     return (
-            <div>
+            <div className="input-form">
                 <form onSubmit={handleSubmit}> 
                     <div className="form-group">
                         <label>Name</label>

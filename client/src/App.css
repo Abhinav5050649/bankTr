@@ -25,3 +25,23 @@
     transform: rotate(360deg);
   }
 }
+
+.input-group{
+  width: 50%;
+  text-align: center;
+  align-items: center;
+  margin: 20px 20px 20px 325px;
+  padding: 10px;
+  flex-direction: column;
+  flex-shrink: 20px;
+}
+
+.input-form{
+  width: 50%;
+  text-align: center;
+  align-items: center;
+  margin: 20px 20px 20px 325px;
+  padding: 10px;
+  flex-direction: column;
+  flex-shrink: 20px;
+}
