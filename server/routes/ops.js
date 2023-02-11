@@ -5,10 +5,12 @@ const router = express.Router();
 const User = require("../models/user");
 
 //To make more
-router.get(`/getuserdets`, fetchUser, async(req, res) => {
+router.get(`/getuserdets`, async(req, res) => {
     try{
         const user = await User.findOne({email: req.headers.email});
-        res.json(user);
+        if (user)
+            res.json(user);
+        else res.status(400).send(`User Not Found`);
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);
@@ -16,7 +18,7 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
 });
 
 //Checked. Works fine now. Don't touch it no more!!!
-router.put(`/modifyuser/:id`, fetchUser, 
+router.put(`/modifyuser/:id`,
 [
     body("amount").exists(),
 ],

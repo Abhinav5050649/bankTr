@@ -10,7 +10,6 @@ const Transfer = () => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token":   localStorage.getItem('token'),
                 "email": localStorage.getItem('email'),
             },
     });
@@ -31,7 +30,6 @@ const Transfer = () => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token":   localStorage.getItem('token'),
                     "email": receiverEmail,
                 },
             });
@@ -49,7 +47,7 @@ const Transfer = () => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem('token'),
+                        "email": localStorage.getItem("email"),
                     },
                     body: JSON.stringify({"amount": data1}),
                 });
@@ -58,7 +56,7 @@ const Transfer = () => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem('token'),
+                        "email": receiverEmail,
                     },
                     body: JSON.stringify({"amount": data2}),
                 });

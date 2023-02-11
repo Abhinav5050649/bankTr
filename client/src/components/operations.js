@@ -8,7 +8,6 @@ const Operations = () => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "auth-token":   localStorage.getItem('token'),
             "email": localStorage.getItem('email'),
         },
     });
@@ -31,7 +30,7 @@ const Operations = () => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem('token'),
+                    "email": localStorage.getItem("email"),
                 },
                 body: JSON.stringify({"amount": data.amount}),
             });
@@ -52,7 +51,7 @@ const Operations = () => {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token'),
+                "email": localStorage.getItem("email"),
             },
             body: JSON.stringify({"amount": data.amount}),
         });
