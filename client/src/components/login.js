@@ -23,13 +23,14 @@ export const Login = () => {
         })
         
         const json = await response.json();
+
         console.log(json);
 
         if (json.success)
         {
             localStorage.setItem('token', json.authToken);
             localStorage.setItem('email', email);
-            navigate("/operations");
+            navigate("/");
         }else{
             alert("invalid Type")
         }
@@ -50,6 +51,7 @@ export const Login = () => {
                         <label>Password</label>
                         <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="textFormControlInput1" required={true}></input>
                     </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
         </div>
     );

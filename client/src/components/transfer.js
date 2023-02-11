@@ -6,18 +6,19 @@ const Transfer = () => {
     const [amtDefine, setAmtDefine] = React.useState(0.00)
     const [receiverEmail, setReceiverEmail] = React.useState('');
 
-    let user1 = null;
-    const getDets = async() => {
-        const response = await fetch(`/api/ops/getuserdets`, {
+    let user1 = fetch(`/api/ops/getuserdets`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token":   localStorage.getItem('token'),
                 "email": localStorage.getItem('email'),
             },
-        });
-        user1 = await response.json();
-    }
+    });
+
+    console.log(user1)
+    let user1Amount = 0
+    if (user1)  user1Amount = user1.amount
+    else    alert("Issues to solve from server")
 
     //defined
     const handleTransaction = async(e) => {
@@ -76,10 +77,9 @@ const Transfer = () => {
         }
     }
 
-    getDets();
     return(
         <div className="input-group">
-            <label>Amount at present: {}</label><br/>
+            <label>Amount at present: {user1Amount}</label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
@@ -87,7 +87,7 @@ const Transfer = () => {
             <label>Enter receiver's EmailId: </label>
             <input type="email" className="input-control" value={receiverEmail} onChange={(e) => setReceiverEmail(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
 
-            <button type="button" class="btn btn-success" onClick={handleTransaction}>Transfer</button>
+            <button type="button" className="btn btn-success" onClick={handleTransaction}>Transfer</button>
         </div>
     )
 };

@@ -29,7 +29,6 @@ function App() {
       <>
       <Router>
         <Newnav/>
-        <alert/>
           <div className="App">
             <Routes>
               <Route exact path="/operations" element={<Operations key="operations" />}/>

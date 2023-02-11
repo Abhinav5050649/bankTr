@@ -66,9 +66,8 @@ router.post(`/login`,
     [
         body("email").isEmail(),
         body("password").isLength({min: 5}),
-    ], fetchUser, async(req, res) => {
+    ], async(req, res) => {
         try{
-            userId = req.user.id;
             const user = await User.findOne({email: req.body.email})
 
             if (!user)

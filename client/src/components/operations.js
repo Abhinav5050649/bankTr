@@ -4,19 +4,16 @@ import { useNavigate } from "react-router-dom";
 const Operations = () => {
 
     const [amtDefine, setAmtDefine] = React.useState(0.00)
-    let user1 = null;
-    const getDets = async() => {
-        const response = await fetch(`/api/ops/getuserdets`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token":   localStorage.getItem('token'),
-                "email": localStorage.getItem('email'),
-            },
-        });
-        user1 = await response.json();
-    }
+    let user1 = fetch(`/api/ops/getuserdets`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token":   localStorage.getItem('token'),
+            "email": localStorage.getItem('email'),
+        },
+    });
     
+    console.log(user1)
     //to define
     const handleWithdraw = async(e) => {
         if (user1.amount - amtDefine < 0)
@@ -64,7 +61,6 @@ const Operations = () => {
         else console.log(`Deposit Error!`)
     }
 
-    getDets();
     return(
         <div className="input-group">
             <label>Amount at present: {user1.amount}</label><br/>
@@ -72,7 +68,7 @@ const Operations = () => {
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
 
-            <button type="button" class="btn btn-success" onClick={handleDeposit}>Deposit</button>   <button type="button" class="btn btn-danger" onClick={handleWithdraw}>Withdraw</button>
+            <button type="button" className="btn btn-success" onClick={handleDeposit}>Deposit</button>   <button type="button" className="btn btn-danger" onClick={handleWithdraw}>Withdraw</button>
         </div>
     )
 };

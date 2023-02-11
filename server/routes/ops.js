@@ -37,7 +37,7 @@ async(req, res) => {
             {$set: useDets},
             {new: true}
         )
-        res.json("Success");
+        res.status(200).send("Success")
 
         console.log(useDets)
     }catch(error){
