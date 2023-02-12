@@ -27,7 +27,7 @@ const Signup = () => {
             const json = await response.json();
             console.log(json);
             
-            localStorage.setItem(`email`) = email;
+            localStorage.setItem(`email`, email);
             navigate("/login");
         }
         else{

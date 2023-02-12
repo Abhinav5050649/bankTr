@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const Transfer = () => {
 
-    const [amtDefine, setAmtDefine] = React.useState(0.00)
+    const [amtDefine, setAmtDefine] = React.useState(0)
     const [receiverEmail, setReceiverEmail] = React.useState('');
 
-    let user1 = fetch(`/api/ops/getuserdets`, {
+    let user1 = fetch(`http://localhost:5000/api/ops/getuserdets`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -15,9 +15,6 @@ const Transfer = () => {
     });
 
     console.log(user1)
-    let user1Amount = 0
-    if (user1)  user1Amount = user1.amount
-    else    alert("Issues to solve from server")
 
     //defined
     const handleTransaction = async(e) => {
@@ -26,15 +23,14 @@ const Transfer = () => {
             alert("Error");
         }
         else{
-            const response0 = await fetch(`/api/ops/getuserdets`, {
+            let user2 = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "email": receiverEmail,
                 },
             });
-
-            let user2 = await response0.json();
+            console.log(user2)
             if (user2 == null)
             {
                 alert("Error");
@@ -42,8 +38,8 @@ const Transfer = () => {
             else{
                 let data1 = user1.amount - amtDefine;
                 let data2 = user2.amount + amtDefine;
-
-                const response1 = await fetch(`/api/ops/modifyuser/${user1._id}`, {
+                console.log(data1 + " " + data2)
+                const response1 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -52,7 +48,8 @@ const Transfer = () => {
                     body: JSON.stringify({"amount": data1}),
                 });
 
-                const response2 = await fetch(`/api/ops/modifyuser/${user2._id}`, {
+                console.log(receiverEmail)
+                const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -61,7 +58,7 @@ const Transfer = () => {
                     body: JSON.stringify({"amount": data2}),
                 });
 
-                if (response1.json() === "Success" && response2.json() === "Success")   
+                if (response1 === "Success" && response2 === "Success")   
                 {
                     alert("Transaction Successful!!!")
                     console.log("Success")
@@ -77,7 +74,7 @@ const Transfer = () => {
 
     return(
         <div className="input-group">
-            <label>Amount at present: {user1Amount}</label><br/>
+            <label>Amount at present: {user1.amount}</label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>

@@ -52,9 +52,7 @@ router.post(`/createuser`,
                 }
             };
 
-            const authToken = jwt.sign(data, JWT_SECRET);
-
-            res.json({success, authToken});
+            res.json("Success");
         }   catch (error) {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);
@@ -78,7 +76,7 @@ router.post(`/login`,
             const passwordComparison = await bcrypt.compare(req.body.password, user.password);
 
             if (!passwordComparison){
-                return res.status(400).json({error: `Incorrect Details!`});
+                return res.status(400).json({error: `Wrong Password`});
             }
 
             const data = {
@@ -86,10 +84,8 @@ router.post(`/login`,
                     id: user.id,
                 },
             }
-
-            const authToken = jwt.sign(data, JWT_SECRET);
-
-            res.json({success: authToken});
+            res.json("Success");
+            
         }   catch (error)   {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);

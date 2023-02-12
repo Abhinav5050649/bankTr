@@ -10,7 +10,7 @@ import Transfer from "./components/transfer";
 
 function App() {
 
-  if (!localStorage.getItem('token')){
+  if (!localStorage.getItem('access')){
     return (
       <>
         <Router>

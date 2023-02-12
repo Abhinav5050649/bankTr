@@ -26,9 +26,10 @@ export const Login = () => {
 
         console.log(json);
 
-        if (json.success)
+        if (json === "Success")
         {
             localStorage.setItem('email', email);
+            localStorage.setItem('access', true);
             navigate("/");
         }else{
             alert("Auth Error");

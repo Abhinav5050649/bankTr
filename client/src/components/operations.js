@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const Operations = () => {
 
-    const [amtDefine, setAmtDefine] = React.useState(0.00)
-    let user1 = fetch(`/api/ops/getuserdets`, {
+    const [amtDefine, setAmtDefine] = React.useState(0)
+    let user1 = fetch(`http://localhost:5000/api/ops/getuserdets`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -15,48 +15,66 @@ const Operations = () => {
     console.log(user1)
     //to define
     const handleWithdraw = async(e) => {
+        console.log(amtDefine)
         if (user1.amount - amtDefine < 0)
         {
             alert(`Insufficient Funds!!!`);
         }
         else
         {
-            const data = {
-                "amount": user1.amount - amtDefine,
-            }
-
+            let data = user1.amount - amtDefine
             //Manage
-            const response = await fetch(`/api/ops/modifyuser/${user1._id}`, {
+            // const response = await fetch(`/api/ops/modifyuser`, {
+            //     method: "PUT",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "email": localStorage.getItem("email"),
+            //         "access": localStorage.getItem("access"),
+            //     },
+            //     body: JSON.stringify({"amount": user1.amount - amtDefine}),
+            // });
+            const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     "email": localStorage.getItem("email"),
+                    "access": localStorage.getItem("access"),
                 },
-                body: JSON.stringify({"amount": data.amount}),
+                body: JSON.stringify({
+                    "amount": data,
+                }),
             });
-            const json = response.json()
-            if (json === "Success")   console.log(`Withdrawal successful!`)
+            if (response === "Success")   console.log(`Withdrawal successful!`)
             else console.log(`Withdrawal Error!`)
         }
     }
 
     //to define
     const handleDeposit = async(e) => {
+        console.log(amtDefine)
+        let data = user1.amount + amtDefine
+        // const response = await fetch(`/api/ops/modifyuser`, {
+        //     method: "PUT",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "email": localStorage.getItem("email"),
+        //         "access": localStorage.getItem("access"),
+        //     },
+        //     body: JSON.stringify({"amount": user1.amount + amtDefine}),
+        // });
 
-        const data = {
-            "amount": (user1.amount + amtDefine),
-        }
-
-        const response = await fetch(`/api/ops/modifyuser/${user1._id}`, {
+        const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "email": localStorage.getItem("email"),
+                "access": localStorage.getItem("access"),
             },
-            body: JSON.stringify({"amount": data.amount}),
+            body: JSON.stringify({
+                "amount": data,
+            }),
         });
-        const json = response.json()
-        if (json === "Success")   console.log(`Deposit successful!`)
+        if (response === "Success")   console.log(`Deposit successful!`)
         else console.log(`Deposit Error!`)
     }
 

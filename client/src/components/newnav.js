@@ -6,8 +6,8 @@ const Newnav = ()=> {
     let navigate = useNavigate();
 
     const handleClick = (e) => {
-      localStorage.removeItem('token');
       localStorage.removeItem('email');
+      localStorage.removeItem('access');
       navigate("/");
     }
     
