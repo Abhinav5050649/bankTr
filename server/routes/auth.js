@@ -12,6 +12,7 @@ let success = true
 
 //defined routes and Tested. All routes working fine!!!
 
+//Removed fetchUser in login and createuser because of errors. Need to check
 router.post(`/createuser`, 
 [
     body("name").isLength({min: 3}),
