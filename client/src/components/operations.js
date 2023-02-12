@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Operations = () => {
 
-    const [amtDefine, setAmtDefine] = React.useState(0.00)
+    const [amtDefine, setAmtDefine] = React.useState(0)
     let user1 = fetch(`/api/ops/getuserdets`, {
         method: "GET",
         headers: {
