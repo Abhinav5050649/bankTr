@@ -16,7 +16,7 @@ const Signup = () => {
         e.preventDefault();
 
         if (password === secPass){
-            const response = await fetch(`/api/auth/createuser`, {
+            const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -27,8 +27,8 @@ const Signup = () => {
             const json = await response.json();
             console.log(json);
             
-            localStorage.setItem('token', json.authToken);
-            navigate("/login");
+            localStorage.setItem('token', json.auth-token);
+            navigate("/");
         }
         else{
             alert("Please properly confirm password!");

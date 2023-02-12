@@ -14,7 +14,7 @@ export const Login = () => {
         console.log(`Clicked`);
         e.preventDefault();
 
-        const response = await fetch(`/api/auth/login`, {
+        const response = await fetch(`http://localhost:5000/api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,8 +28,7 @@ export const Login = () => {
 
         if (json.success)
         {
-            localStorage.setItem('token', json.authToken);
-            localStorage.setItem('email', email);
+            localStorage.setItem('token', json.auth-token);
             navigate("/");
         }else{
             alert("invalid Type")

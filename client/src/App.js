@@ -17,7 +17,7 @@ function App() {
           <Navbar/>
             <div className="App">
               <Routes>
-                <Route exact path="/login" element={<Login key="login" />}/>
+                <Route exact path="/" element={<Login key="login" />}/>
                 <Route exact path="/signup" element={<Signup key="signup" />}/>
               </Routes>
             </div>
@@ -31,7 +31,7 @@ function App() {
         <Newnav/>
           <div className="App">
             <Routes>
-              <Route exact path="/operations" element={<Operations key="operations" />}/>
+              <Route exact path="/" element={<Operations key="operations" />}/>
               <Route exact path="/transfer" element={<Transfer key="transfer" />}/>
             </Routes>
           </div>

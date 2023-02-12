@@ -25,7 +25,7 @@ router.post(`/createuser`,
         if (!errors.isEmpty())
         {
             success = false;
-            return res.status(400).send({success, errors: errors.array()})
+            return res.status(400).send({"success": success, "errors": errors.array()})
         }
 
         try{
@@ -34,7 +34,7 @@ router.post(`/createuser`,
             if (user)
             {
                 success = false
-                return res.status(400).json({success, errors: `Account exists!`})
+                return res.status(400).json({"success": success, "errors": `Account exists!`})
             }
 
             const salt = await bcrypt.genSalt(10);
@@ -55,7 +55,7 @@ router.post(`/createuser`,
 
             const authToken = jwt.sign(data, JWT_SECRET);
 
-            res.json({success, authToken});
+            res.json({"success": true, "auth-token": authToken});
         }   catch (error) {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);
@@ -73,13 +73,13 @@ router.post(`/login`,
 
             if (!user)
             {
-                return res.status(400).json(`Incorrect Details`)
+                return res.status(400).json({"success": false})
             }
 
             const passwordComparison = await bcrypt.compare(req.body.password, user.password);
 
             if (!passwordComparison){
-                return res.status(400).json({error: `Incorrect Details!`});
+                return res.status(400).json({"success": false})
             }
 
             const data = {
@@ -90,7 +90,7 @@ router.post(`/login`,
 
             const authToken = jwt.sign(data, JWT_SECRET);
 
-            res.json({success: authToken});
+            res.json({"success": true, "auth-token": authToken});
         }   catch (error)   {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);
