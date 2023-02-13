@@ -5,9 +5,10 @@ const router = express.Router();
 const User = require("../models/user");
 
 //To make more
-router.get(`/getuserdets`, fetchUser, async(req, res) => {
+router.get(`/getuserdets`, async(req, res) => {
     try{
-        const user = await User.findOne({email: req.body.email});
+        const user = await User.findOne({"email": req.headers.email});
+        console.log(user)
         res.json(user);
     }catch(error){
         console.error(error);
@@ -16,50 +17,27 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
 });
 
 //Checked. Works fine now. Don't touch it no more!!!
-router.put(`/modifycurrentuser`, fetchUser, async(req, res) => {
+router.put(`/modifyuser`, async(req, res) => {
     try{
-        const {amount, status} = req.body;
-        console.log(res)
-        let useDets = await User.findOne({_id: res.user._id});
+        //console.log(req)
+        const {email, amount, status} = req.body;
+        let useDets = await User.findOne({"email": email});
         if (!useDets)
         {
             return res.status(404).json({"success": false, "message": "Can't find user"})
         }
 
-        if (req.body.status === "W")    useDets.amount -= amount;
-        else if (req.body.status === "D")   useDets.amount += amount;
+        if (useDets.amount === null) useDets.amount = 0;
+
+        if (status === "W")    useDets.amount -= amount;
+        else if (status === "D")   useDets.amount += amount;
 
         useDets = await User.findOneAndUpdate(
             {_id: useDets._id},
             {$set: useDets},
             {new: true}
         )
-        res.status(200).json({"success": true})
-    }catch(error){
-        console.error(error);
-        res.status(500).send(`Internal Server Error!!!`);
-    }
-});
-
-
-router.put(`/modifyspecificuser`, async(req, res) => {
-    try{
-        let amount = req.body.amount;
-        
-        let useDets = await User.findOne({email: req.body.email});
-        if (!useDets)
-        {
-            return res.status(404).json({"success": false, "message": "Can't find user"})
-        }
-
-        useDets.amount += amount;
-
-        useDets = await User.findOneAndUpdate(
-            {_id: useDets._id},
-            {$set: useDets},
-            {new: true}
-        )
-        res.status(200).json({"success": true})
+        res.status(200).json({"success": true, "message": "Operation Successful"})
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);

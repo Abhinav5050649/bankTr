@@ -6,13 +6,14 @@ const Transfer = () => {
     const [amtDefine, setAmtDefine] = React.useState(0)
     const [receiverEmail, setReceiverEmail] = React.useState('');
 
-    // let user1 = fetch(`http://localhost:5000/api/ops/getuserdets`, {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "auth-token":   localStorage.getItem('token'),
-    //         },
-    // });
+    let user1 = fetch(`http://localhost:5000/api/ops/getuserdets`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token":   localStorage.getItem('token'),
+            },
+            body: JSON.stringify({"email": localStorage.getItem('email')}),
+    });
 
     //defined
     const handleTransaction = async(e) => {
@@ -33,22 +34,22 @@ const Transfer = () => {
                 // let data1 = user1.amount - amtDefine;
                 // let data2 = user2.amount + amtDefine;
 
-                const response1 = await fetch(`http://localhost:5000/api/ops/modifycurentuser`, {
+                const response1 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "auth-token": localStorage.getItem('token'),
                     },
-                    body: JSON.stringify({"amount": amtDefine, "status": "W"}),
+                    body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "W"}),
                 });
 
-                const response2 = await fetch(`http://localhost:5000/api/ops/modifyspecificuser`, {
+                const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "auth-token": localStorage.getItem('token'),
                     },
-                    body: JSON.stringify({"amount": amtDefine, "email": receiverEmail}),
+                    body: JSON.stringify({"amount": amtDefine, "email": receiverEmail, "status": "D"}),
                 });
 
                 if (response1.success && response2.success)   
@@ -59,15 +60,14 @@ const Transfer = () => {
                 else
                 {
                     alert("Transaction Failed")
-                    console.log("Issue")
+                    console.log("Error while sending request")
                 }
-            //}
     }
 
 
     return(
         <div className="input-group">
-            <label>Amount at present: {}</label><br/>
+            <label>Amount at present: {user1.amount}</label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>

@@ -8,8 +8,6 @@ const fetchUser = require("../middleware/fetchuser");
 
 const JWT_SECRET = "thisIsJustATest";
 
-let success = true
-
 //defined routes and Tested. All routes working fine!!!
 
 //Removed fetchUser in login and createuser because of errors. Need to check
@@ -33,8 +31,7 @@ router.post(`/createuser`,
 
             if (user)
             {
-                success = false
-                return res.status(400).json({"success": success, "errors": `Account exists!`})
+                return res.status(400).json({"success": false, "errors": "Account exists!"})
             }
 
             const salt = await bcrypt.genSalt(10);
@@ -45,6 +42,7 @@ router.post(`/createuser`,
                 email: req.body.email,
                 password: secPass,
                 amount: 0,
+                status: "N",
             })
 
             const data = {
@@ -64,12 +62,12 @@ router.post(`/createuser`,
 );
 
 router.post(`/login`, 
-    [
-        body("email").isEmail(),
-        body("password").isLength({min: 5}),
-    ], async(req, res) => {
+[
+    body("email").isEmail(),
+    body("password").isLength({min: 5}),
+], async(req, res) => {
         try{
-            const user = await User.findOne({email: req.body.email})
+            const user = await User.findOne({"email": req.body.email})
 
             if (!user)
             {
@@ -91,6 +89,7 @@ router.post(`/login`,
             const authToken = jwt.sign(data, JWT_SECRET);
 
             res.json({"success": true, "authtoken": authToken});
+            
         }   catch (error)   {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);

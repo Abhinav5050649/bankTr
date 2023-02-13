@@ -29,6 +29,7 @@ export const Login = () => {
         if (json.success)
         {
             localStorage.setItem("token", json.authtoken) 
+            localStorage.setItem("email", email)
             navigate("/");
         }else{
             alert("invalid Type")
