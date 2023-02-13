@@ -44,7 +44,7 @@ router.post(`/createuser`,
                 name: req.body.name,
                 email: req.body.email,
                 password: secPass,
-                amount: 0.00,
+                amount: 0,
             })
 
             const data = {
@@ -55,7 +55,7 @@ router.post(`/createuser`,
 
             const authToken = jwt.sign(data, JWT_SECRET);
 
-            res.json({"success": true, "auth-token": authToken});
+            res.json({"success": true, "authtoken": authToken});
         }   catch (error) {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);
@@ -90,7 +90,7 @@ router.post(`/login`,
 
             const authToken = jwt.sign(data, JWT_SECRET);
 
-            res.json({"success": true, "auth-token": authToken});
+            res.json({"success": true, "authtoken": authToken});
         }   catch (error)   {
             console.error(error);
             res.status(500).send(`Internal Server Error!!!`);

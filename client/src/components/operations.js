@@ -5,14 +5,15 @@ const Operations = () => {
 
     const [amtDefine, setAmtDefine] = React.useState(0)
     const handleWithdraw = async(e) => {
-
-        const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
+        console.log(amtDefine)
+        console.log(localStorage.getItem('token'))
+        const response = await fetch(`http://localhost:5000/api/ops/modifycurrentuser`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine}),
+            body: JSON.stringify({"amount": amtDefine, "status": "W"}),
         });
         if (response.success)   console.log(`Withdrawal successful!`)
         else console.log(`Withdrawal Error!`)
@@ -20,13 +21,15 @@ const Operations = () => {
 
     //to define
     const handleDeposit = async(e) => {
-        const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
+        console.log(amtDefine)
+        console.log(localStorage.getItem('token'))
+        const response = await fetch(`http://localhost:5000/api/ops/modifycurrentuser`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine}),
+            body: JSON.stringify({"amount": amtDefine, "status": "D"}),
         });
         if (response.success)   console.log(`Deposit successful!`)
         else console.log(`Deposit Error!`)

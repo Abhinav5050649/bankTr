@@ -16,42 +16,42 @@ const Transfer = () => {
 
     //defined
     const handleTransaction = async(e) => {
-            const response = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({"email": receiverEmail})
-            });
+            // const response = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
+            //     method: "GET",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({"email": receiverEmail})
+            // });
 
-            let user2 = response.json();
-            if (user2 == null)
-            {
-                alert("Error");
-            }
-            else{
-                let data1 = user1.amount - amtDefine;
-                let data2 = user2.amount + amtDefine;
+            // let user2 = response.json();
+            // if (user2 == null)
+            // {
+            //     alert("Error");
+            // }
+            // else{
+                // let data1 = user1.amount - amtDefine;
+                // let data2 = user2.amount + amtDefine;
 
-                const response1 = await fetch(`http://localhost:5000/api/ops/modifyuser/${user1._id}`, {
+                const response1 = await fetch(`http://localhost:5000/api/ops/modifycurentuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "auth-token": localStorage.getItem('token'),
                     },
-                    body: JSON.stringify({"amount": data1}),
+                    body: JSON.stringify({"amount": amtDefine, "status": "W"}),
                 });
 
-                const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser/${user2._id}`, {
+                const response2 = await fetch(`http://localhost:5000/api/ops/modifyspecificuser`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "auth-token": localStorage.getItem('token'),
                     },
-                    body: JSON.stringify({"amount": data2}),
+                    body: JSON.stringify({"amount": amtDefine, "email": receiverEmail}),
                 });
 
-                if (response1.success === "Success" && response2.success === "Success")   
+                if (response1.success && response2.success)   
                 {
                     alert("Transaction Successful!!!")
                     console.log("Success")
@@ -61,7 +61,7 @@ const Transfer = () => {
                     alert("Transaction Failed")
                     console.log("Issue")
                 }
-            }
+            //}
     }
 
 

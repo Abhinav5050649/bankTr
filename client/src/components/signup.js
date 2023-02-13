@@ -26,8 +26,7 @@ const Signup = () => {
             
             const json = await response.json();
             console.log(json);
-            
-            localStorage.setItem('token', json.auth-token);
+            localStorage.setItem('token', json.authtoken);
             navigate("/");
         }
         else{

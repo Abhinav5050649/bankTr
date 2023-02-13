@@ -28,7 +28,7 @@ export const Login = () => {
 
         if (json.success)
         {
-            localStorage.setItem('token', json.auth-token);
+            localStorage.setItem("token", json.authtoken) 
             navigate("/");
         }else{
             alert("invalid Type")

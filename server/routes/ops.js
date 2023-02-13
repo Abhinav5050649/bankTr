@@ -16,20 +16,46 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
 });
 
 //Checked. Works fine now. Don't touch it no more!!!
-router.put(`/modifyuser`, fetchUser, async(req, res) => {
+router.put(`/modifycurrentuser`, fetchUser, async(req, res) => {
     try{
+        console.log(req);
         let amount = req.body.amount;
-        
-        let useDets = await User.findOne({_id: req.params.id});
+        let useDets = await User.findOne({id: res.user.id});
         if (!useDets)
         {
             return res.status(404).json({"success": false, "message": "Can't find user"})
         }
 
-        useDets.amount = amount;
+        if (req.body.status === "W")    useDets.amount -= amount;
+        else if (req.body.status === "D")   useDets.amount += amount;
 
         useDets = await User.findOneAndUpdate(
-            {_id: req.params.id},
+            {_id: useDets._id},
+            {$set: useDets},
+            {new: true}
+        )
+        res.status(200).json({"success": true})
+    }catch(error){
+        console.error(error);
+        res.status(500).send(`Internal Server Error!!!`);
+    }
+});
+
+
+router.put(`/modifyspecificuser`, async(req, res) => {
+    try{
+        let amount = req.body.amount;
+        
+        let useDets = await User.findOne({email: req.body.email});
+        if (!useDets)
+        {
+            return res.status(404).json({"success": false, "message": "Can't find user"})
+        }
+
+        useDets.amount += amount;
+
+        useDets = await User.findOneAndUpdate(
+            {_id: useDets._id},
             {$set: useDets},
             {new: true}
         )
