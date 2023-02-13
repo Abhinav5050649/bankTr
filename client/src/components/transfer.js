@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 const Transfer = () => {
 
@@ -17,51 +16,35 @@ const Transfer = () => {
 
     //defined
     const handleTransaction = async(e) => {
-            // const response = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
-            //     method: "GET",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({"email": receiverEmail})
-            // });
+           
+        const response1 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem('token'),
+            },
+            body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "W"}),
+        });
 
-            // let user2 = response.json();
-            // if (user2 == null)
-            // {
-            //     alert("Error");
-            // }
-            // else{
-                // let data1 = user1.amount - amtDefine;
-                // let data2 = user2.amount + amtDefine;
+        const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem('token'),
+            },
+            body: JSON.stringify({"amount": amtDefine, "email": receiverEmail, "status": "D"}),
+        });
 
-                const response1 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem('token'),
-                    },
-                    body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "W"}),
-                });
-
-                const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem('token'),
-                    },
-                    body: JSON.stringify({"amount": amtDefine, "email": receiverEmail, "status": "D"}),
-                });
-
-                if (response1.success && response2.success)   
-                {
-                    alert("Transaction Successful!!!")
-                    console.log("Success")
-                }
-                else
-                {
-                    alert("Transaction Failed")
-                    console.log("Error while sending request")
-                }
+        if (response1.success && response2.success)   
+        {
+            alert("Transaction Successful!!!")
+            console.log("Success")
+        }
+        else
+        {
+            alert("Transaction Failed")
+            console.log("Error while sending request")
+        }
     }
 
 
