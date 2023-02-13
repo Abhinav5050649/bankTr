@@ -18,9 +18,9 @@ router.get(`/getuserdets`, fetchUser, async(req, res) => {
 //Checked. Works fine now. Don't touch it no more!!!
 router.put(`/modifycurrentuser`, fetchUser, async(req, res) => {
     try{
-        console.log(req);
-        let amount = req.body.amount;
-        let useDets = await User.findOne({id: res.user.id});
+        const {amount, status} = req.body;
+        console.log(res)
+        let useDets = await User.findOne({_id: res.user._id});
         if (!useDets)
         {
             return res.status(404).json({"success": false, "message": "Can't find user"})
