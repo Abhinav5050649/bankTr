@@ -4,8 +4,6 @@ import {useNavigate} from "react-router-dom";
 export const Login = () => {
     
     let navigate = useNavigate();
-    //create indivdual changing components
-    //const [credentials, setCredentials] = useState({email: "", password: ""});
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,26 +17,21 @@ export const Login = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({email: email, password: password})
+            body: JSON.stringify({"email": email, "password": password})
         })
         
-        const json = await response.json();
+        const j = await response.json();
 
-        console.log(json);
-
-        if (json.success)
+        console.log(j);
+        if (j.success)
         {
-            localStorage.setItem("token", json.authtoken) 
-            localStorage.setItem("email", email)
-            navigate("/");
+            localStorage.setItem('token', j.authtoken) 
+            localStorage.setItem('email', email)
+            navigate("/")
         }else{
             alert("invalid Type")
         }
     }
-
-    // const onChange = (e) => {
-    //     setCredentials({...credentials, [e.target.name]: e.target.value});
-    // };
 
     return(
         <div className="input-form">

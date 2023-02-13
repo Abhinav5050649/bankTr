@@ -37,7 +37,7 @@ router.put(`/modifyuser`, async(req, res) => {
             {$set: useDets},
             {new: true}
         )
-        res.status(200).json({"success": true, "message": "Operation Successful"})
+        res.status(200).json({"success": 1, "message": "Operation Successful"})
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);

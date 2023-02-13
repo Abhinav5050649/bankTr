@@ -23,7 +23,7 @@ const Transfer = () => {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "W"}),
+            body: JSON.stringify({"email": localStorage.getItem('email'), "amount": amtDefine, "status": "W"}),
         });
 
         const response2 = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
@@ -32,7 +32,7 @@ const Transfer = () => {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine, "email": receiverEmail, "status": "D"}),
+            body: JSON.stringify({"email": receiverEmail, "amount": amtDefine, "status": "D"}),
         });
 
         if (response1.success && response2.success)   

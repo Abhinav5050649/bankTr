@@ -30,11 +30,11 @@ const Operations = () => {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "W"}),
+            body: JSON.stringify({"email": localStorage.getItem('email'), "amount": amtDefine, "status": "W"}),
         });
-        console.log(response)
-        if (response.success)   console.log(`Withdrawal successful!`)
-        else console.log(`Withdrawal Error!`)
+        console.log(response.success)
+        if (response.success === 1)   console.log(`Withdrawal successful!`)
+        else    console.log(`Withdrawal Error!`)
     }
 
     //to define
@@ -49,12 +49,12 @@ const Operations = () => {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine, "email": localStorage.getItem('email'), "status": "D"}),
+            body: JSON.stringify({ "email": localStorage.getItem('email'), "amount": amtDefine,"status": "D"}),
         });
 
-        console.log(response)
-        if (response.success)   console.log(`Deposit successful!`)
-        else console.log(`Deposit Error!`)
+        console.log(response.success)
+        if (response.success === 1)   console.log(`Deposit successful!`)
+        else    console.log(`Deposit Error!`)
     }
 
     return(
