@@ -15,6 +15,7 @@ const Operations = () => {
             },
             body: JSON.stringify({"amount": amtDefine, "status": "W"}),
         });
+        console.log(response)
         if (response.success)   console.log(`Withdrawal successful!`)
         else console.log(`Withdrawal Error!`)
     }
@@ -23,14 +24,16 @@ const Operations = () => {
     const handleDeposit = async(e) => {
         console.log(amtDefine)
         console.log(localStorage.getItem('token'))
+
         const response = await fetch(`http://localhost:5000/api/ops/modifycurrentuser`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": localStorage.getItem('token'),
             },
-            body: JSON.stringify({"amount": amtDefine, "status": "D"}),
+            body: JSON.stringify({"amount": amtDefine}),
         });
+        console.log(response)
         if (response.success)   console.log(`Deposit successful!`)
         else console.log(`Deposit Error!`)
     }
