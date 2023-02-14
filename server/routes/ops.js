@@ -24,20 +24,20 @@ router.put(`/modifyuser`, async(req, res) => {
         let useDets = await User.findOne({"email": email});
         if (!useDets)
         {
-            return res.status(404).json({"success": false, "message": "Can't find user"})
+            return res.status(404).json({"success": "0", "message": "Can't find user"})
         }
 
         if (useDets.amount === null) useDets.amount = 0;
 
-        if (status === "W")    useDets.amount -= amount;
-        else if (status === "D")   useDets.amount += amount;
+        if (status === "W")    useDets.amount -= Number(amount);
+        else if (status === "D")   useDets.amount += Number(amount);
 
         useDets = await User.findOneAndUpdate(
             {_id: useDets._id},
             {$set: useDets},
             {new: true}
         )
-        res.status(200).json({"success": 1, "message": "Operation Successful"})
+        res.status(200).json({"success": "1", "message": "Operation Successful"})
     }catch(error){
         console.error(error);
         res.status(500).send(`Internal Server Error!!!`);

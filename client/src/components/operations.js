@@ -13,11 +13,12 @@ const Operations = () => {
                 "email": localStorage.getItem('email'),
             }
         });
-        return response.json();
+        let val = await response.json();
+        return val;
     }
 
     let user1 = getDets();
-    console.log(user1)
+    //console.log(user1)
 
     const handleWithdraw = async(e) => {
         console.log(amtDefine)
@@ -32,8 +33,9 @@ const Operations = () => {
             },
             body: JSON.stringify({"email": localStorage.getItem('email'), "amount": amtDefine, "status": "W"}),
         });
-        console.log(response.success)
-        if (response.success === 1)   console.log(`Withdrawal successful!`)
+        const j = await response.json()
+        console.log(j)
+        if (j.success === "1")   console.log(`Withdrawal successful!`)
         else    console.log(`Withdrawal Error!`)
     }
 
@@ -52,14 +54,15 @@ const Operations = () => {
             body: JSON.stringify({ "email": localStorage.getItem('email'), "amount": amtDefine,"status": "D"}),
         });
 
-        console.log(response.success)
-        if (response.success === 1)   console.log(`Deposit successful!`)
+        const j = await response.json()
+        console.log(j)
+        if (j.success === "1")   console.log(`Deposit successful!`)
         else    console.log(`Deposit Error!`)
     }
 
     return(
         <div className="input-group">
-            <label>Amount at present: {user1.amount}</label><br/>
+            <label>Amount at present: {toString(user1.amount)}</label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
