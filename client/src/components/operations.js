@@ -4,6 +4,7 @@ const Operations = () => {
 
     const [amtDefine, setAmtDefine] = React.useState(0)
 
+    //refer diary app for mapping function for solution[to be used for transfer component as well]
     const getDets = async(e) => {
         let response = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
             method: "GET",
