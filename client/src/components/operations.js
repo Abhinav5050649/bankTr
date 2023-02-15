@@ -18,7 +18,7 @@ const Operations = () => {
     }
 
     let user1 = getDets();
-    //console.log(user1)
+    console.log(user1)
 
     const handleWithdraw = async(e) => {
         console.log(amtDefine)
@@ -59,11 +59,24 @@ const Operations = () => {
         if (j.success === "1")   console.log(`Deposit successful!`)
         else    console.log(`Deposit Error!`)
     }
-
+    
+    // const jsonstring =JSON.parse(user1)
+    // console.log(jsonstring)
+    // document.getElementsByClassName("test").innerHTML=jsonstring.amount
+    // let str = "amount at present = " + user1.amount;
+    // let displaystring = document.getElementById("test").innerText =str
     return(
         <div className="input-group">
-            <label>Amount at present: {toString(user1.amount)}</label><br/>
-
+            {
+                //  user1.map((item) => {
+                //     return (
+                //         <li key={item._id} className="list-group-item">
+                //             <p>Amount at present: {item.amount}</p>
+                //         </li>
+                //     );
+                // })
+            }
+            
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
 

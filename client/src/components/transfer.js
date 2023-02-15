@@ -70,10 +70,11 @@ const Transfer = () => {
         }
     }
 
-
+    let str = "amount at present = " + user1.amount;
+    let displaystring = document.getElementById("test").innerText =str
     return(
         <div className="input-group">
-            <label>Amount at present: {toString(user1.amount)}</label><br/>
+            <label id="test"></label><br/>
 
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
