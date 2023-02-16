@@ -1,11 +1,14 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 const Operations = () => {
 
-    const [amtDefine, setAmtDefine] = React.useState(0)
+    let navigate = useNavigate();
 
-    //refer diary app for mapping function for solution[to be used for transfer component as well]
-    const getDets = async(e) => {
+    const [amtDefine, setAmtDefine] = React.useState(0)
+    const [userAmount, setUserAmount] = React.useState(0)
+    
+    const getDets = async() => {
         let response = await fetch(`http://localhost:5000/api/ops/getuserdets`, {
             method: "GET",
             headers: {
@@ -15,36 +18,48 @@ const Operations = () => {
             }
         });
         let val = await response.json();
+        //console.log(val)
+        setUserAmount(val.amount)
         return val;
     }
 
     let user1 = getDets();
-    console.log(user1)
-
+    
     const handleWithdraw = async(e) => {
-        console.log(amtDefine)
-        console.log(localStorage.getItem('token'))
-        console.log(localStorage.getItem('email'))
-
-        const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token'),
-            },
-            body: JSON.stringify({"email": localStorage.getItem('email'), "amount": amtDefine, "status": "W"}),
-        });
-        const j = await response.json()
-        console.log(j)
-        if (j.success === "1")   console.log(`Withdrawal successful!`)
-        else    console.log(`Withdrawal Error!`)
+        // console.log(amtDefine)
+        // console.log(localStorage.getItem('token'))
+        // console.log(localStorage.getItem('email'))
+        if (userAmount < amtDefine)
+        {
+            alert("Insufficient Balance!!!")
+        }else{
+            const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem('token'),
+                },
+                body: JSON.stringify({"email": localStorage.getItem('email'), "amount": amtDefine, "status": "W"}),
+            });
+            const j = await response.json()
+            console.log(j)
+            if (j.success === "1"){
+                alert(`Withdrawal successful!`)
+                setAmtDefine(0)
+                navigate("/")
+            }else{   
+                alert(`Withdrawal Error!`)
+                setAmtDefine(0)
+                navigate("/")
+            }
+        }
     }
 
     //to define
     const handleDeposit = async(e) => {
-        console.log(amtDefine)
-        console.log(localStorage.getItem('token'))
-        console.log(localStorage.getItem('email'))
+        // console.log(amtDefine)
+        // console.log(localStorage.getItem('token'))
+        // console.log(localStorage.getItem('email'))
 
         const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
             method: "PUT",
@@ -57,27 +72,21 @@ const Operations = () => {
 
         const j = await response.json()
         console.log(j)
-        if (j.success === "1")   console.log(`Deposit successful!`)
-        else    console.log(`Deposit Error!`)
+        if (j.success === "1")   
+        {
+            alert(`Deposit successful!`)
+            setAmtDefine(0)
+            navigate("/")
+        }else{    
+            alert(`Deposit Error!`)
+            setAmtDefine(0)
+            navigate("/")
+        }
     }
     
-    // const jsonstring =JSON.parse(user1)
-    // console.log(jsonstring)
-    // document.getElementsByClassName("test").innerHTML=jsonstring.amount
-    // let str = "amount at present = " + user1.amount;
-    // let displaystring = document.getElementById("test").innerText =str
     return(
         <div className="input-group">
-            {
-                //  user1.map((item) => {
-                //     return (
-                //         <li key={item._id} className="list-group-item">
-                //             <p>Amount at present: {item.amount}</p>
-                //         </li>
-                //     );
-                // })
-            }
-            
+            <label>Amount at Present: {`${userAmount}`}</label><br/>
             <label>Enter amount: </label>
             <input type="number" className="input-control" value={amtDefine} onChange={(e) => setAmtDefine(e.target.value)} id="textFormControlInput1" required={true}></input><br/>
 
