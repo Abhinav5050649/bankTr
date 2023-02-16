@@ -18,7 +18,6 @@ const Operations = () => {
             }
         });
         let val = await response.json();
-        //console.log(val)
         setUserAmount(val.amount)
         return val;
     }
@@ -26,9 +25,6 @@ const Operations = () => {
     let user1 = getDets();
     
     const handleWithdraw = async(e) => {
-        // console.log(amtDefine)
-        // console.log(localStorage.getItem('token'))
-        // console.log(localStorage.getItem('email'))
         if (userAmount < amtDefine)
         {
             alert("Insufficient Balance!!!")
@@ -55,12 +51,7 @@ const Operations = () => {
         }
     }
 
-    //to define
     const handleDeposit = async(e) => {
-        // console.log(amtDefine)
-        // console.log(localStorage.getItem('token'))
-        // console.log(localStorage.getItem('email'))
-
         const response = await fetch(`http://localhost:5000/api/ops/modifyuser`, {
             method: "PUT",
             headers: {

@@ -22,7 +22,7 @@ export const Login = () => {
         
         const j = await response.json();
 
-        console.log(j);
+        console.log(j.success);
         if (j.success)
         {
             localStorage.setItem('token', j.authtoken) 

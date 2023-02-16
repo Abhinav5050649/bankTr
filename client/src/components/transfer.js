@@ -24,9 +24,7 @@ const Transfer = () => {
     }
 
     let user1 = getDets();
-    //console.log(user1)
-
-    //defined
+    
     const handleTransaction = async(e) => {
            
         if (amtDefine > userAmount)
@@ -52,8 +50,6 @@ const Transfer = () => {
             });
 
             const j1 = await response1.json(), j2 = await response2.json()
-            // console.log(j1)
-            // console.log(j2)
 
             if (j1.success === "1" && j2.success === "1")   
             {
