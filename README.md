@@ -1,6 +1,6 @@
 # Mini Bank Management System
 
-This is just a MERN Project to simulate a mini-bank management system, which can be used to demonstrate the 
+This is just a MERN Project to simulate a mini-bank management system, which can be used to demonstrate 
 the fundamental functioning of apps like GPay.
 
 ## Requirements
