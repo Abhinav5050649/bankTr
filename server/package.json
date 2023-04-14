@@ -22,6 +22,6 @@
     "express-handlebars": "^6.0.7",
     "express-validator": "^6.14.3",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.9.0"
+    "mongoose": "^6.7.2"
   }
 }

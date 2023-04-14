@@ -5,9 +5,10 @@ const router = express.Router();
 const User = require("../models/user");
 
 //To make more
-router.get(`/getuserdets`, async(req, res) => {
+router.get(`/getuserdets`, fetchUser, async(req, res) => {
     try{
-        const user = await User.findOne({"email": req.headers.email});
+        //const user = await User.findOne({"email": req.headers.email});
+        const user = await User.findById(req.user.id)
         console.log(user)
         res.json(user);
     }catch(error){
@@ -17,11 +18,12 @@ router.get(`/getuserdets`, async(req, res) => {
 });
 
 //Checked. Works fine now. Don't touch it no more!!!
-router.put(`/modifyuser`, async(req, res) => {
+router.put(`/modifyuser`, fetchUser, async(req, res) => {
     try{
         //console.log(req)
         const {email, amount, status} = req.body;
-        let useDets = await User.findOne({"email": email});
+        //let useDets = await User.findOne({"email": email});
+        let useDets = await User.findById(req.user.id)
         if (!useDets)
         {
             return res.status(404).json({"success": "0", "message": "Can't find user"})

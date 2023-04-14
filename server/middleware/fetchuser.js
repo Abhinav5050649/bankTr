@@ -12,7 +12,7 @@ const fetchUser = (req, res, next) => {
     try{
         const data = jwt.verify(token, JWT_SECRET);
         req.user = data.user
-        res.json(req.user)
+        next()
     }   catch (error)   {
         res.status(401).send({error: "Faulty Authentication"})
     }
